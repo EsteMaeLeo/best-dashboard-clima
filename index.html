@@ -4,12 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./assets/css/styles.css" />
 
     <title>You Best Weather Report</title>
 </head>
+<header>
+  <!-- Jumbotron -->
+  <div class="p-5 text-center bg-primary">
+    <h1 class="mb-2">Weather Dashboard</h1>
+  </div>
+  <!-- Jumbotron -->
+</header>
+
 <body>
     
+    <section class="container-fluid" >
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="card">
+            <h3 class="card-header text-color">Search for a City</h3>
+            <form id="city-form" class="form-inline card-body flex-column">
+              <div class="d-grid gap-2">
+              <input name="location" id="location" type="text" autofocus="true" class="form-control text-color" placeholder="Enter City Name"/>
+              <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i>Search Location</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
