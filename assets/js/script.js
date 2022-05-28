@@ -1,5 +1,6 @@
 var cityFormEl = document.querySelector("#city-form");
 var locationInputEl = document.querySelector("#location");
+var error = document.querySelector(".modal-error");
 
 var formSubmitHandler = function (event) {
   event.preventDefault();
@@ -12,6 +13,8 @@ var formSubmitHandler = function (event) {
   }
   console.log(event);
 };
+
+error.addEventListener("click", closeError);
 
 var getCityData = function () {};
 
