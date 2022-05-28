@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- CSS only -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-      crossorigin="anonymous">
-    <link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+    />
     <link rel="stylesheet" href="./assets/css/styles.css" />
 
     <title>You Best Weather Report</title>
@@ -25,7 +28,6 @@
   </header>
 
   <body>
-
     <section class="container-fluid">
       <div class="row">
         <div class="col-lg-3">
@@ -33,65 +35,48 @@
             <h3 class="card-header text-color">Search for a City</h3>
             <form id="city-form" class="form-inline card-body flex-column">
               <div class="d-grid gap-2">
-                <input name="location" id="location" type="text"
-                  autofocus="true" class="form-control text-color"
-                  placeholder="Enter City Name" />
-                <button type="submit" class="btn btn-primary"><i class="bi
-                    bi-search"></i> Search Location</button>
-
+                <input
+                  name="location"
+                  id="location"
+                  type="text"
+                  autofocus="true"
+                  class="form-control text-color"
+                  placeholder="Enter City Name"
+                />
+                <button type="submit" class="btn btn-primary">
+                  <i class="bi bi-search"></i> Search Location
+                </button>
               </div>
             </form>
           </div>
         </div>
+
+        <div class="col-12 col-lg-9 mt-2">
+          <div id="weather-container">
+            <div id="current-weather" class="row">
+              <h2 class="col-12 text-color">
+                City: --
+                <img src="" />
+              </h2>
+              <p class="col-12 text-color">Temp: --</p>
+              <p class="col-12 text-color">Wind: --</p>
+              <p class="col-12 text-color">Humidity: --</p>
+              <p class="col-12 text-color">
+                UV Index: <span class="uvi badge bg-success">--</span>
+              </p>
+            </div>
+            <!-- 5-day forecast -->
+            <h3>5-Day Forcast:</h3>
+            <div
+              class="row justify-content-between"
+              id="forecast-container"
+            ></div>
+          </div>
+        </div>
       </div>
     </section>
-
-    <!--Error Message-->
-    <div class="modal modal-error" id="error-message">
-      <div class="modal-background"></div>
-      <div class="modal-card">
-        <header class="modal-card-head has-text-centered"
-          style="background-color:#7a7979">
-          <p class="modal-card-title" style="color: #ffffee;
-            background-color:#7a7979">Error</p>
-          <button class="delete" id="modal-close" aria-label="close"></button>
-        </header>
-        <section class="modal-card-body" style="background-color: #ffffee">
-          <div class="content text-center">
-            <p class="has-text-centered" id="error-msg">Error on API</p>
-            <div>
-            </section>
-            <footer class="modal-card-foot" style="background-color: #7a7979">
-              <button class="button is-danger" id="btn-close">Close</button>
-            </footer>
-          </div>
-
-        </div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="./assets/js/script.js"></script>
-      </body>
-
-    </html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
