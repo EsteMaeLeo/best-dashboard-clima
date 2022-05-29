@@ -11,10 +11,18 @@ var loadWeather = function () {
 
   previousCities = JSON.parse(localStorage.getItem("cityWeather"));
 
-  for (var i = 0; i < previousCities.length; i++) {
-    $("#cities-buttons").append(
-      '<div class="bg-primary p-1 fs-6 text-center ">' + previousCities[i].name
-    );
+  if (previousCities) {
+    for (var i = 0; i < previousCities.length; i++) {
+      // $("#cities-buttons").append(
+      //   '<div class="bg-primary p-1 fs-6 text-center ">' + previousCities[i].name
+      // );
+      $("#cities-buttons").append(
+        '<button class="btn btn-primary" id="' +
+          previousCities[i].name +
+          '">' +
+          previousCities[i].name
+      );
+    }
   }
 };
 
@@ -33,6 +41,9 @@ var saveCity = function (cityName, lon, lat) {
     previousCities = [];
     previousCities.push(citStr);
     localStorage.setItem("cityWeather", JSON.stringify(previousCities));
+    $("#cities-buttons").append(
+      '<button class="btn btn-primary" id="' + citStr.name + '">' + citStr.name
+    );
   } else {
     for (var i = 0; i < previousCities.length; i++) {
       if (previousCities[i].name === citStr.name) {
@@ -64,7 +75,6 @@ var formSubmitHandler = function (event) {
   } else {
     alert("Please enter a City");
   }
-  console.log(event);
 };
 
 //get Geocity data and pass to savecity and then create element display data
@@ -117,7 +127,6 @@ var cityWeather = function (lat, lon, cityName) {
     if (response.ok) {
       response.json().then(function (data) {
         if (data.length != 0) {
-          console.log(data);
           displayWeather(data, cityName);
         } else {
           alert("Error to get the city weather");
@@ -164,7 +173,7 @@ var displayWeather = function (cityData, cityName) {
     $("#uvCurrent").append(
       '<span class="uvi badge bg-warning">' + cityData.current.uvi + "</span>"
     );
-  } else if (cityData.current.uvi >= 6 && cityData.current.uvi < 8) {
+  } else if (cityData.current.uvi >= 6 && cityData.current.uvi < 11) {
     $("#uvCurrent").html("UV Index: ");
     $("#uvCurrent").append(
       '<span class="uvi badge bg-danger">' + cityData.current.uvi + "</span>"
@@ -232,9 +241,9 @@ var cityForecast = function (dailyData) {
         " <span></span> %"
     );
   }
+  $("input[id=location]").val("");
 };
-{
-}
+
 var cityClick = function (event) {
   var city = event.target.textContent;
 
