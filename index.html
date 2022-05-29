@@ -54,18 +54,15 @@
         <div class="col-12 col-lg-9 mt-2">
           <div id="weather-container">
             <div id="current-weather" class="row">
-              <h2 class="col-12 text-color">
-                City: --
-                <img src="" />
+              <h2 class="col-12 text-color" id="cName">
+                City:
+                <img id="imgAttr" />
               </h2>
-              <p class="col-12 text-color">Temp: --</p>
-              <p class="col-12 text-color">Wind: --</p>
-              <p class="col-12 text-color">Humidity: --</p>
-              <p class="col-12 text-color">
-                UV Index: <span class="uvi badge bg-success">--</span>
-              </p>
+              <p class="col-12 text-color" id="tempCurrent"></span> &deg;F</p>
+              <p class="col-12 text-color" id="windCurrent"></p>
+              <p class="col-12 text-color" id="humidityCurrent"></p>
+              <p class="col-12 text-color" id="uvCurrent"></p>
             </div>
-            <!-- 5-day forecast -->
             <h3>5-Day Forcast:</h3>
             <div
               class="row justify-content-between"
