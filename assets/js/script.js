@@ -3,10 +3,58 @@ var locationInputEl = document.querySelector("#location");
 var cityGlobal = " ";
 var containerWeather = document.querySelector("#weather-container");
 
+var listCities = document.querySelector("#cities-buttons");
+
+//load from localstorage the cities and create a list
 var loadWeather = function () {
   containerWeather.style.visibility = "hidden";
+
+  previousCities = JSON.parse(localStorage.getItem("cityWeather"));
+
+  for (var i = 0; i < previousCities.length; i++) {
+    $("#cities-buttons").append(
+      '<div class="bg-primary p-1 fs-6 text-center ">' + previousCities[i].name
+    );
+  }
 };
 
+//save the city search to localstorage check if the city is already on the localstorage
+var saveCity = function (cityName, lon, lat) {
+  var cityFound = false;
+  var citStr = {
+    name: cityName,
+    longitude: lon,
+    latitude: lat,
+  };
+  //check if there a same city allready
+  previousCities = JSON.parse(localStorage.getItem("cityWeather"));
+  if (!previousCities) {
+    //no cities in localstorage
+    previousCities = [];
+    previousCities.push(citStr);
+    localStorage.setItem("cityWeather", JSON.stringify(previousCities));
+  } else {
+    for (var i = 0; i < previousCities.length; i++) {
+      if (previousCities[i].name === citStr.name) {
+        cityFound = true;
+        break;
+      }
+    }
+    //city is not previous safe
+    if (!cityFound) {
+      previousCities.push(citStr);
+      localStorage.setItem("cityWeather", JSON.stringify(previousCities));
+      $("#cities-buttons").append(
+        '<button class="btn btn-primary" id="' +
+          citStr.name +
+          '">' +
+          citStr.name
+      );
+    }
+  }
+};
+
+//click even from submit
 var formSubmitHandler = function (event) {
   event.preventDefault();
   var cityName = locationInputEl.value.trim();
@@ -19,6 +67,7 @@ var formSubmitHandler = function (event) {
   console.log(event);
 };
 
+//get Geocity data and pass to savecity and then create element display data
 var getCityData = function (cityName) {
   cityGlobal = " ";
   var key = "98cc685a511e4cdddd0311ce79a8e339";
@@ -35,6 +84,7 @@ var getCityData = function (cityName) {
           var lat = data[0].lat;
           var lon = data[0].lon;
           cityGlobal = data[0].name;
+          saveCity(data[0].name, lon, lat);
           cityWeather(lat, lon, cityGlobal);
         } else {
           alert("Please check name of the city");
@@ -46,6 +96,7 @@ var getCityData = function (cityName) {
   });
 };
 
+//get all city weather data
 var cityWeather = function (lat, lon, cityName) {
   var key = "98cc685a511e4cdddd0311ce79a8e339";
   var lang = "en";
@@ -78,6 +129,7 @@ var cityWeather = function (lat, lon, cityName) {
   });
 };
 
+//display the information
 var displayWeather = function (cityData, cityName) {
   containerWeather.style.visibility = "visible";
   //convert date
@@ -107,12 +159,12 @@ var displayWeather = function (cityData, cityName) {
     $("#uvCurrent").append(
       '<span class="uvi badge bg-success">' + cityData.current.uvi + "</span>"
     );
-  } else if (current.uvi >= 3 && current.uvi < 6) {
+  } else if (cityData.current.uvi >= 3 && cityData.current.uvi < 6) {
     $("#uvCurrent").html("UV Index: ");
     $("#uvCurrent").append(
-      '<span class="uvi badge bg-warning>' + cityData.current.uvi + "</span>"
+      '<span class="uvi badge bg-warning">' + cityData.current.uvi + "</span>"
     );
-  } else if (current.uvi >= 6 && current.uvi < 8) {
+  } else if (cityData.current.uvi >= 6 && cityData.current.uvi < 8) {
     $("#uvCurrent").html("UV Index: ");
     $("#uvCurrent").append(
       '<span class="uvi badge bg-danger">' + cityData.current.uvi + "</span>"
@@ -122,16 +174,15 @@ var displayWeather = function (cityData, cityName) {
   cityForecast(cityData.daily);
 };
 
+//create the cards for the forecast city weather
 var cityForecast = function (dailyData) {
   //previous searchs elimanate those elements
   if ($("#rowForecast div").length > 0) {
     $("#rowForecast div").remove();
-    // $('#section-cards br').remove();
   }
   $("#rowForecast").append('<div class="row" id="rowNew">');
   //forecast for 5 days
   for (var i = 0; i < 5; i++) {
-    //$("#rowForecast").append('<div class="row" id="row' + i + '">');
     $("#rowNew").append(
       '<div class="col-lg-2 col-md-3 col-6" id="col' + i + '">'
     );
@@ -184,7 +235,13 @@ var cityForecast = function (dailyData) {
 };
 {
 }
+var cityClick = function (event) {
+  var city = event.target.textContent;
 
+  getCityData(city);
+};
+
+listCities.addEventListener("click", cityClick);
 cityFormEl.addEventListener("submit", formSubmitHandler);
 
 loadWeather();
