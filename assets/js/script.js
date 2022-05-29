@@ -102,7 +102,7 @@ var cityWeather = function (lat, lon, cityName) {
   var lang = "en";
   var units = "imperial";
   var url =
-    "http://api.openweathermap.org/data/2.5/onecall?lat=" +
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
     lat +
     "&lon=" +
     lon +
